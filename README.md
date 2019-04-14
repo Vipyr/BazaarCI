@@ -15,6 +15,8 @@ s2 = Step(g, "Step2", target=lambda: print("Step2"))
 
 s1.produces.add(p)
 s2.consumes.add(p)
+
+g.start()
 ```
 
 ## Frontend - bazaarci
