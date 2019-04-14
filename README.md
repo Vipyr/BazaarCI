@@ -1,12 +1,13 @@
 # Bazaar CI
 
+## Backend
 
-## Backend - bazaar
+### `bazaarci.runner`
 
 A simple example, two steps where the first step produces a product `p` that is consumed by the second step.
 
 ```python
-from bazaar import Graph, Step, Product
+from bazaar.runner import Graph, Step, Product
 
 g = Graph()
 p = Product("p")
@@ -19,5 +20,8 @@ s2.consumes.add(p)
 g.start()
 ```
 
-## Frontend - bazaarci
+## Frontend
 
+### `bazaarci.web`
+
+### `bazaarci.cli`
