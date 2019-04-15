@@ -1,4 +1,4 @@
-from unittest import TestCase, skip
+from unittest import TestCase
 from unittest.mock import MagicMock
 from bazaarci.runner import Graph
 

@@ -1,4 +1,4 @@
-from threading import Thread
+from threading import Event, Thread
 from typing import Callable, Optional
 
 from bazaarci.runner.node import Node
@@ -35,7 +35,8 @@ class Step(Node):
 
     def run(self):
         [product.wait() for product in self.consumes()]
-        self.target()
+        if self.target is not None:
+            self.target()
         [product.set() for product in self.produces()]
 
     def __str__(self):

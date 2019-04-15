@@ -7,9 +7,6 @@ class Graph(Node, set):
     def __init__(self, name: str, graph: Optional["Graph"] = None):
         super().__init__(name, graph)
 
-    def start(self):
-        [step.start() for step in self]
-
     def produces(self):
         for node in self:
             for product in node.produces():
@@ -20,3 +17,8 @@ class Graph(Node, set):
             for product in node.consumes():
                 yield product
 
+    def start(self):
+        [step.start() for step in self]
+
+    def wait(self):
+        [step.thread.join() for step in self if step.thread and step.thread.is_alive()]
