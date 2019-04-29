@@ -16,5 +16,6 @@ setup(
     # Packages to install
     packages=[
         'bazaarci',
+        'bazaarci.runner',
     ],
 )
