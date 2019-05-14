@@ -8,8 +8,8 @@ class TestNode(TestCase):
     def test_produces(self, mock_Product):
         s = Step("test")
         with self.subTest("With Argument"):
-            s.produces("rawr")
-            mock_Product.from_name.assert_called_once_with("rawr")
+            s.produces(mock_Product)
+            self.assertIn(mock_Product, s._produces)
         with self.subTest("Without Argument"):
             produces = s.produces()
             self.assertEqual(len(produces), 1)
@@ -18,8 +18,8 @@ class TestNode(TestCase):
     def test_consumes(self, mock_Product):
         s = Step("test")
         with self.subTest("With Argument"):
-            s.consumes("rawr")
-            mock_Product.from_name.assert_called_once_with("rawr")
+            s.consumes(mock_Product)
+            self.assertIn(mock_Product, s._consumes)
         with self.subTest("Without Argument"):
             consumes = s.consumes()
             self.assertEqual(len(consumes), 1)
