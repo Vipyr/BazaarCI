@@ -1,0 +1,40 @@
+digraph RemoteSubmission {
+  LocalEnd [label="END"]
+  RemoteEnd [label="END"]
+
+  "BEGIN" -> "Wait For Input Products"
+  "Wait For Input Products" -> "Subprocess Submission"
+  "Subprocess Submission" -> "Wait For Call"
+  "Wait For Call" -> "Setup Multiprocessing Proxy"
+  "Setup Multiprocessing Proxy" -> "proxy.run"
+  "proxy.run" -> "Set Output Products"
+  "Set Output Products" -> "proxy.join"
+  "proxy.join" -> LocalEnd
+
+  "Subprocess Submission" -> "Call Home"
+  "Call Home" -> "Wait For Call"
+  "proxy.run" -> "run"
+  "run" -> "Set Output Products"
+  "proxy.join" -> RemoteEnd
+  RemoteEnd -> LocalEnd
+
+  subgraph "cluster_Local Thread" {
+    label="Local Thread"
+
+    "BEGIN"
+    "Wait For Input Products"
+    "Subprocess Submission"
+    "Wait For Call"
+    "Setup Multiprocessing Proxy"
+    "proxy.run"
+    "Set Output Products"
+    "proxy.join"
+    LocalEnd
+  }
+
+  subgraph "cluster_Remote Thread" {
+    label="Remote Thread"
+
+    "Call Home" -> "run" -> RemoteEnd
+  }
+}
