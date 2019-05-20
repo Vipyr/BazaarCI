@@ -21,4 +21,4 @@ class Graph(Node, set):
         [step.start() for step in self]
 
     def wait(self):
-        [step.thread.join() for step in self if step.thread and step.thread.is_alive()]
+        [step.wait() for step in self]
