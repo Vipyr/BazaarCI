@@ -12,6 +12,7 @@ class Step(Node):
         self._produces = set()
         self.target = target
         self.thread = None
+        self.output = None
         if self.graph is not None:
             self.graph.add(self)
 
@@ -36,11 +37,15 @@ class Step(Node):
     def run(self):
         [product.wait() for product in self.consumes()]
         if self.target is not None:
-            self.target()
+            self.output = self.target()
         [product.set() for product in self.produces()]
+
+    def wait(self):
+        if self.thread and self.thread.is_alive():
+            self.thread.join()
 
     def __str__(self):
         return self.name
 
     def __repr__(self):
-        return "Step({})".format(self.name)
+        return "{}({})".format(self.__class__.__name__, self.name)
