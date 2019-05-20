@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from bazaarci.runner import Step
 
 
-class TestNode(TestCase):
+class TestStep(TestCase):
     @patch("bazaarci.runner.step.Product")
     def test_produces(self, mock_Product):
         s = Step("test")
