@@ -19,16 +19,16 @@ class Step(Node):
     def produces(self, item: str = None):
         if item is None:
             return self._produces
-        if isinstance(item, str):
-            item = Product.from_name(item)
-        self._produces.add(item)
+        # The ability to call item.set() is necessary for outputs.
+        elif hasattr(item, "set") and callable(item.set):
+            self._produces.add(item)
 
     def consumes(self, item: str = None):
         if item is None:
             return self._consumes
-        if isinstance(item, str):
-            item = Product.from_name(item)
-        self._consumes.add(item)
+        # The ability to call item.wait() is necessary for inputs.
+        elif hasattr(item, "wait") and callable(item.wait):
+            self._consumes.add(item)
 
     def start(self):
         self.thread = Thread(target=self.run)
