@@ -4,7 +4,8 @@
 
 ### `bazaarci.runner`
 
-[Samples](sites.github.com/Vipyr/BazaarCI)
+
+[Samples](https://vipyr.github.io/BazaarCI/)
 
 ## Frontend
 

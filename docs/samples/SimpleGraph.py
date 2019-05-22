@@ -1,3 +1,9 @@
+""" A simple two-node graph where a single product
+serializes steps one and two.
+
+Step1 --p-> Step2
+"""
+
 from bazaarci.runner import Graph, Product, Step
 
 g = Graph("g")
