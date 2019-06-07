@@ -66,7 +66,7 @@ def product_to_dot(product):
     color = "green" if product.is_set() else "yellow"
     return f"\"{product.name}\" [style=filled color={color}]"
 
-setattr(Graph, "to_dot", graph_to_dot)
-setattr(Step, "to_dot", step_to_dot)
-setattr(SubprocessStep, "to_dot", subprocess_step_to_dot)
-setattr(Product, "to_dot", product_to_dot)
+apply_serializer(Graph, "to_dot", graph_to_dot)
+apply_serializer(Step, "to_dot", step_to_dot)
+apply_serializer(SubprocessStep, "to_dot", subprocess_step_to_dot)
+apply_serializer(Product, "to_dot", product_to_dot)
