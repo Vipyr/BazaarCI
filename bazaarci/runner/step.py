@@ -1,3 +1,4 @@
+from functools import reduce
 from threading import Event, Thread
 from typing import Callable, Optional
 
@@ -36,9 +37,13 @@ class Step(Node):
 
     def run(self):
         [product.wait() for product in self.consumes()]
-        if self.target is not None:
-            self.output = self.target()
-        [product.set() for product in self.produces()]
+        # Once all inputs are available, check that there are unset outputs.
+        # If all output products have already been set, then this step is
+        # not required to run.
+        if reduce(lambda x, y: x and y.wait(0), self.produces(), True):
+            if self.target is not None:
+                self.output = self.target()
+            [product.set() for product in self.produces()]
 
     def wait(self):
         if self.thread and self.thread.is_alive():

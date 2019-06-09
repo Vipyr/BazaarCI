@@ -32,7 +32,16 @@ class TestStep(TestCase):
         mock_Thread.assert_called_once_with(target=s.run)
 
     def test_run(self):
-        mock_target = MagicMock()
-        s = Step("test", target=mock_target)
-        s.run()
-        mock_target.assert_called_once_with()
+        with self.subTest("Productive Step"):
+            mock_target = MagicMock()
+            s = Step("test", target=mock_target)
+            s.run()
+            mock_target.assert_called_once_with()
+        with self.subTest("Non-Productive Step"):
+            mock_target = MagicMock()
+            s = Step("test", target=mock_target)
+            mock_product = MagicMock()
+            mock_product.wait.return_value = False
+            s.produces(mock_product)
+            s.run()
+            mock_target.assert_not_called()
