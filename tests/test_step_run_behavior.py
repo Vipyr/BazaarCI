@@ -24,6 +24,7 @@ class TestStepRunBehavior(TestCase):
 
     def test_skip_if_redundant(self):
         with self.subTest("No output Products"):
+            # There are no outputs, always run
             mock_Step = MagicMock()
             mock_run = MagicMock()
             mock_Step.produces.return_value = []
