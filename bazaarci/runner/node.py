@@ -1,4 +1,4 @@
-from typing import Optional, Set, Union
+from typing import Any, Optional, Set, Union
 
 
 class Node:
@@ -27,11 +27,4 @@ class Node:
         """
         raise NotImplementedError(
             "Class `{}` has not implemented a `start` method!".format(self.__class__.__name__)
-        )
-
-    def run(self) -> None:
-        """ Code that will be executed in the background thread.
-        """
-        raise NotImplementedError(
-            "Class `{}` has not implemented a `run` method!".format(self.__class__.__name__)
         )
