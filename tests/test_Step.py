@@ -31,8 +31,8 @@ class TestStep(TestCase):
         self.assertIsNotNone(s.thread)
         mock_Thread.assert_called_once_with(target=s.run)
 
-    def test_run(self):
+    def test__run(self):
         mock_target = MagicMock()
         s = Step("test", target=mock_target)
-        s.run()
+        s._run()
         mock_target.assert_called_once_with()
