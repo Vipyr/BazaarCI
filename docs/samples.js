@@ -4,46 +4,30 @@ const samples = [
 ]
 
 
-class PythonSample {
-  constructor(samplename) {
-    this.name = samplename
-    this.filename = "samples/" + this.name + ".py"
-  }
+function code_sample(samplename) {
+  var filename = "samples/" + samplename + ".py"
+  var div = document.createElement("div")
 
-  addToDocument() {
-    var div = document.createElement("div")
-    var header = document.createElement("h3")
-    var pre = document.createElement("pre")
-    var code = document.createElement("code")
-    document.body.append(div)
-    div.append(header)
-    div.append(pre)
-    pre.append(code)
-    header.textContent = this.name
+  var header = document.createElement("h3")
+  header.textContent = samplename
 
-    var result = null;
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", this.filename, false);
-    xmlhttp.overrideMimeType("text/plain")
-    xmlhttp.send();
-    if (xmlhttp.status==200) {
-      result = xmlhttp.responseText;
-      code.textContent = result
-      code.className = "language-python"
-    }
-    else {
-      sample1.textContent = "Load of " + this.filename + " failed!"
-    }
-  }
+  var pre = document.createElement("pre")
+  pre.setAttribute("data-type", "text/plain")
+  pre.setAttribute("data-src", filename)
+
+  div.append(header)
+  div.append(pre)
+  return div
+}
+
+
+function main() {
+  samples.forEach(function(samplename) {
+    document.getElementById("Samples").append(code_sample(samplename))
+  })
+  console.log(document)
+
 }
 
 
 main()
-
-function main() {
-  samples.forEach(function(samplename) {
-    sample = new PythonSample(samplename)
-    sample.addToDocument()
-  })
-
-}
