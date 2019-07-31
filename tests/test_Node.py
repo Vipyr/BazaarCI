@@ -17,8 +17,3 @@ class TestNode(TestCase):
         n = Node("test")
         with self.assertRaises(NotImplementedError):
             n.start()
-
-    def test_run(self):
-        n = Node("test")
-        with self.assertRaises(NotImplementedError):
-            n.run()

@@ -26,8 +26,3 @@ class TestNode(TestCase):
         g.add(mock_Step)
         g.start()
         mock_Step.start.assert_called_once_with()
-
-    def test_run(self):
-        g = Graph("test")
-        with self.assertRaises(NotImplementedError):
-            g.run()
